@@ -1,5 +1,6 @@
 package com.dali.admin.livestreaming.mvc.view.Iview;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.widget.TabHost;
 import com.dali.admin.livestreaming.R;
 import com.dali.admin.livestreaming.base.BaseActivity;
 import com.dali.admin.livestreaming.fragment.MVCLivaMainFragment;
-import com.dali.admin.livestreaming.fragment.PublishFragment;
 import com.dali.admin.livestreaming.fragment.UserInfoFragment;
 import com.dali.admin.livestreaming.mvc.controller.MVCMainController;
 
@@ -22,7 +22,7 @@ public abstract class MVCIMainView extends BaseActivity implements MVCBaseView {
     protected MVCMainController mMainController;
 
     public FragmentTabHost mTabHost;
-    protected final Class mFragmentArray[] = {MVCLivaMainFragment.class, PublishFragment.class, UserInfoFragment.class};
+    protected final Class mFragmentArray[] = {MVCLivaMainFragment.class, Fragment.class, UserInfoFragment.class};
     protected int mImageViewArray[] = {R.drawable.tab_live_selector, R.drawable.tab_pubish_selector, R.drawable.tab_my_selector};
     protected String mTextViewArray[] = {"live", "publish", "mine"};
 

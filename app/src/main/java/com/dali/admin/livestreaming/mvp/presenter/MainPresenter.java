@@ -1,5 +1,6 @@
 package com.dali.admin.livestreaming.mvp.presenter;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +10,6 @@ import android.widget.TabHost;
 import com.dali.admin.livestreaming.R;
 import com.dali.admin.livestreaming.base.BaseActivity;
 import com.dali.admin.livestreaming.fragment.LiveMainFragment;
-import com.dali.admin.livestreaming.fragment.PublishFragment;
 import com.dali.admin.livestreaming.fragment.UserInfoFragment;
 import com.dali.admin.livestreaming.mvp.presenter.Ipresenter.IMainPresenter;
 import com.dali.admin.livestreaming.mvp.view.Iview.IMainView;
@@ -23,8 +23,8 @@ public class MainPresenter extends IMainPresenter {
 
     private IMainView mIMainView;
 
-    private FragmentTabHost mTabHost;
-    private final Class mFragmentArray[] = {LiveMainFragment.class, PublishFragment.class, UserInfoFragment.class};
+    public FragmentTabHost mTabHost;
+    private final Class mFragmentArray[] = {LiveMainFragment.class, Fragment.class, UserInfoFragment.class};
     private int mImageViewArray[] = {R.drawable.tab_live_selector, R.drawable.tab_pubish_selector, R.drawable.tab_my_selector};
     private String mTextViewArray[] = {"live", "publish", "mine"};
 
