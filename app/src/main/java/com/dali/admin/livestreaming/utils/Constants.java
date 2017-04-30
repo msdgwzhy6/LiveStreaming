@@ -2,8 +2,6 @@ package com.dali.admin.livestreaming.utils;
 
 /**
  * @description: 静态函数
- * @author: Andruby
- * @time: 2016/12/17 10:23
  */
 public class Constants {
 
@@ -25,23 +23,36 @@ public class Constants {
 	public static final String USER_LOC = "user_location";
 
 
+	private final static int MAIN_CALL_BACK = 1;
+	private final static int MAIN_PROCESS = 2;
+	private final static int UPLOAD_AGAIN = 3;
+
+	//封面图
+	public final static int LIVE_COVER_TYPE = 1;
+	//头像
+	public final static int USER_HEAD_TYPE = 2;
 
 	//主播退出广播字段
 	public static final String EXIT_APP = "EXIT_APP";
 
-	public static final int USER_INFO_MAXLEN = 20;
-	public static final int TV_TITLE_MAX_LEN = 30;
-	public static final int NICKNAME_MAX_LEN = 20;
+	//文字长度限制
+	public static final int USER_INFO_MAXLEN = 20;//用户信息最大长度
+	public static final int TV_TITLE_MAX_LEN = 30;//直播标题最大长度
+	public static final int NICKNAME_MAX_LEN = 20;//昵称最大长度
 
 	//直播类型
-	public static final int RECORD_TYPE_CAMERA = 991;
-	public static final int RECORD_TYPE_SCREEN = 992;
+	public static final int RECORD_TYPE_CAMERA = 991;//摄像头直播
+	public static final int RECORD_TYPE_SCREEN = 992;//录屏直播
 
+	//封面图片类型
+	public static final int PICK_IMAGE_CAMERA = 100;//相机
+	public static final int PICK_IMAGE_LOCAL = 200;//本地相册
+	public static final int CROP_CHOOSE = 10;//已裁剪图片进行上传
 
 	//码率
-	public static final int BITRATE_SLOW = 900;
-	public static final int BITRATE_NORMAL = 1200;
-	public static final int BITRATE_FAST = 1600;
+	public static final int BITRATE_SLOW = 900;//流畅
+	public static final int BITRATE_NORMAL = 1200;//高清
+	public static final int BITRATE_FAST = 1600;//超清
 
 	//直播端右下角listview显示type
 	public static final int AVIMCMD_TEXT_TYPE = 0;
@@ -59,9 +70,9 @@ public class Constants {
 	public static final int AVIMCMD_DANMU = 19;       // 直播回调状态消息。
 	public static final int MSG_SHOW_ADMIN = 71;       // 场控相关评论样式
 
-
-	public static final int LOCATION_PERMISSION_REQ_CODE = 1;
-	public static final int WRITE_PERMISSION_REQ_CODE = 2;
+	//权限
+	public static final int LOCATION_PERMISSION_REQ_CODE = 1;//定位权限
+	public static final int WRITE_PERMISSION_REQ_CODE = 2;//写入外部存储权限
 
 	public static final String PUBLISH_URL = "publish_url";
 	public static final String ROOM_ID = "room_id";
@@ -112,9 +123,9 @@ public class Constants {
 //	public static final String TIPS_MSG_STOP_PUSH = LiveApp.getApplication().getString(R.string.msg_stop_push_error);
 
 	//网络类型
-	public static final int NETTYPE_WIFI = 0;
-	public static final int NETTYPE_NONE = 1;
-	public static final int NETTYPE_2G = 2;
-	public static final int NETTYPE_3G = 3;
-	public static final int NETTYPE_4G = 4;
+	public static final int NETTYPE_WIFI = 0;//wifi
+	public static final int NETTYPE_NONE = 1;//未知
+	public static final int NETTYPE_2G = 2;//2g
+	public static final int NETTYPE_3G = 3;//3g
+	public static final int NETTYPE_4G = 4;//4g
 }

@@ -7,9 +7,6 @@ import java.lang.reflect.Type;
 
 /**
  * @description: 发送礼物请求
- *
- * @author: Andruby
- * @time: 2016/11/2 18:07
  */
 public class SendGiftReuqest extends IRequest {
 

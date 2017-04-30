@@ -9,9 +9,6 @@ import java.lang.reflect.Type;
 
 /**
  * @description: 创建直播接口请求
- *
- * @author: Andruby
- * @time: 2016/11/2 18:07
  */
 public class CreateLiveRequest extends IRequest {
 

@@ -22,5 +22,16 @@
     <string name="activity_register_phone_num">手机号</string>
     <string name="activity_register_verify_code">验证码</string>
     <string name="activity_register_return">返回</string>
+    <string name="text_publish">开始直播</string>
+    <string name="text_live_record_no">不进行录制</string>
+    <string name="text_live_preview">发起直播</string>
+    <string name="btn_cancel">取消</string>
+    <string name="text_live_add_title_tips">给你的直播设置一个满意的封面</string>
+    <string name="text_live_title_input">请输入直播标题</string>
+    <string name="text_live_close_lbs">不显示地理位置</string>
+    <string name="teke_photo">拍照</string>
+    <string name="pic_lib">从相册中选择</string>
+    <string name="cancel">取消</string>
+    <string name="float_window_not_allow">悬浮窗权限未开启 请在应用-权限中打开悬浮窗权限</string>
     <!--registerActivity -->
 </resources>

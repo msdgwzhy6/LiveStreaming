@@ -1,5 +1,6 @@
 package com.dali.admin.livestreaming.utils;
 
+import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.ComponentName;
@@ -7,6 +8,8 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,6 +33,8 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
+import android.support.annotation.NonNull;
+import android.support.v4.content.PermissionChecker;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -38,13 +43,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dali.admin.livestreaming.R;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
+import java.util.Properties;
 
 /**
  * @description: 其他工具类
- * @author: Andruby
- * @time: 2016/12/17 10:23
  */
 public class OtherUtils {
 
@@ -271,6 +279,87 @@ public class OtherUtils {
 		}
 
 		return null;
+	}
+
+	/**
+	 * 悬浮窗权限检查
+	 * 当前仅对MIUI8作了适配，其余机型有待添加
+	 *
+	 * @throws IOException
+	 */
+	@TargetApi(Build.VERSION_CODES.KITKAT)
+	public static void checkFloatWindowPermission(final Context context) throws IOException {
+
+		Properties properties = new Properties();
+		properties.load(new FileInputStream(new File(Environment.getRootDirectory(), "build.prop")));
+
+		String versionName = properties.getProperty("ro.miui.ui.version.name");
+		if (null != versionName) {
+			//miui8以上需要悬浮窗权限才能正常显示悬浮窗
+			if (versionName.equals("V8")) {
+
+				//检测悬浮窗权限，无权限则弹出提示
+				if (!checkPermission(context, Manifest.permission.SYSTEM_ALERT_WINDOW)) {
+					AlertDialog.Builder builder = new AlertDialog.Builder(context, R.style.NormalDialog);
+					builder.setTitle(context.getString(R.string.float_window_not_allow));
+					builder.setPositiveButton("开启", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+							final Intent intent = new Intent();
+							intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+							intent.addCategory(Intent.CATEGORY_DEFAULT);
+							intent.setData(Uri.parse("package:" + context.getPackageName()));
+							intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+							intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+							intent.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+							context.startActivity(intent);
+						}
+					});
+					builder.setNegativeButton("不，谢谢", new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dialog.dismiss();
+						}
+					});
+					AlertDialog alertDialog = builder.create();
+					alertDialog.setCancelable(false);
+					alertDialog.show();
+				}
+			}
+		}
+	}
+
+	/**
+	 * 权限检查
+	 *
+	 * @param context    context
+	 * @param permission permission
+	 * @return true -- 当前拥有该权限  false -- 当前无权限
+	 */
+	@TargetApi(Build.VERSION_CODES.KITKAT)
+	public static boolean checkPermission(@NonNull final Context context, String permission) {
+		boolean result = false;
+
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+			try {
+				final PackageInfo info = context.getPackageManager().getPackageInfo(
+						context.getPackageName(), 0);
+				int targetSdkVersion = info.applicationInfo.targetSdkVersion;
+				//targetSDKVersion为23时，可以直接通过context.checkSelfPermission检查权限
+				if (targetSdkVersion >= Build.VERSION_CODES.M) {
+					result = context.checkSelfPermission(permission)
+							== PackageManager.PERMISSION_GRANTED;
+				} else {
+					result = PermissionChecker.checkSelfPermission(context, permission)
+							== PermissionChecker.PERMISSION_GRANTED;
+				}
+			} catch (PackageManager.NameNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return result;
 	}
 
 	/**
@@ -545,16 +634,20 @@ public class OtherUtils {
 
 		switch (getNetWorkType(context)){
 			case Constants.NETTYPE_2G:
-				ToastUtils.showShort(context,"当前网络是2G网络");
+//				ToastUtils.showShort(context,"当前网络是2G网络");
+				Log.e("NETTYPE_2G","当前网络是2G网络");
 				break;
 			case Constants.NETTYPE_3G:
-				ToastUtils.showShort(context,"当前网络是3G网络");
+//				ToastUtils.showShort(context,"当前网络是3G网络");
+				Log.e("NETTYPE_3G","当前网络是3G网络");
 				break;
 			case Constants.NETTYPE_4G:
-				ToastUtils.showShort(context,"当前网络是4G网络");
+//				ToastUtils.showShort(context,"当前网络是4G网络");
+				Log.e("NETTYPE_4G","当前网络是4G网络");
 				break;
 			case Constants.NETTYPE_WIFI:
-				ToastUtils.showShort(context,"当前网络是wifi");
+//				ToastUtils.showShort(context,"当前网络是wifi");
+				Log.e("NETTYPE_4G","当前网络是wifi");
 				break;
 		}
 

@@ -2,8 +2,6 @@ package com.dali.admin.livestreaming.http.request;
 
 /**
  * @description: 请求ID
- * @author: Andruby
- * @time: 2016/11/2 18:07
  */
 public class RequestComm {
 

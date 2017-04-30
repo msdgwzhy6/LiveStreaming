@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg_dark"
+    android:background="@drawable/bg_dark"
     android:id="@+id/rl_login_root"
     tools:context="com.dali.admin.livestreaming.activity.LoginActivity">
 

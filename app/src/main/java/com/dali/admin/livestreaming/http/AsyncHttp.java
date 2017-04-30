@@ -65,6 +65,19 @@ public class AsyncHttp {
 		return mInstance;
 	}
 
+	public void post(IRequest request, IHttpListener listener) {
+		Log.e(TAG, "post: url=" + request.getUrl());
+		if (request != null) {
+			request.getParams()
+					.getPostFormBuilder()
+					.url(request.getUrl())
+					.id(request.getRequestId())
+					.build()
+					.execute(new ResponseCallback(listener, request.getParserType()));
+		} else {
+			throw new RuntimeException("Request param is null");
+		}
+	}
 
 	//get 请求
 	public void get(IRequest request, IHttpListener listener) {

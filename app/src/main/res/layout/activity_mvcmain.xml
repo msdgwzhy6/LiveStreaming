@@ -18,7 +18,7 @@
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/tab_bg">
+        android:background="@drawable/tab_bg">
 
         <FrameLayout
             android:id="@android:id/tabcontent"

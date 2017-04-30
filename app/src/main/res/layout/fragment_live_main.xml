@@ -10,7 +10,7 @@
         android:id="@+id/self_create_titlebar"
         android:layout_width="match_parent"
         android:layout_height="48dip"
-        android:background="@color/tab_blue_bg">
+        android:background="@color/colorAccent">
 
         <ImageView
             android:id="@+id/iv_search"
@@ -19,7 +19,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
-            android:src="@mipmap/search"/>
+            android:src="@drawable/search"/>
 
         <ImageView
             android:id="@+id/iv_message"
@@ -29,7 +29,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
-            android:src="@mipmap/message"/>
+            android:src="@drawable/message"/>
 
         <com.astuetz.PagerSlidingTabStrip
             android:id="@+id/pager_sliding_tab_strip"

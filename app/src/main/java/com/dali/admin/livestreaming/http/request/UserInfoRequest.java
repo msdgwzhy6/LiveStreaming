@@ -9,9 +9,6 @@ import java.lang.reflect.Type;
 
 /**
  * @description: 用户信息请求
- *
- * @author: Andruby
- * @time: 2016/11/2 18:07
  */
 public class UserInfoRequest   extends IRequest {
 

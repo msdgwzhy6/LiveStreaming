@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_gravity="bottom"
+              android:background="@color/background"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_chose_camera"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@color/colorTextWhite"
+        android:textColor="@color/colorTextBlack"
+        android:text="@string/teke_photo"
+        android:onClick="onClick"/>
+
+    <View
+        style="@style/horizontal_line"/>
+
+    <TextView
+        android:id="@+id/tv_pic_lib"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@color/colorTextWhite"
+        android:textColor="@color/colorTextBlack"
+        android:text="@string/pic_lib"
+        android:onClick="onClick"/>
+
+
+
+    <TextView
+        android:id="@+id/tv_dialog_cancel"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:background="@color/colorTextWhite"
+        android:textColor="@color/colorTextBlack"
+        android:text="@string/cancel"
+        android:onClick="onClick"/>
+</LinearLayout>

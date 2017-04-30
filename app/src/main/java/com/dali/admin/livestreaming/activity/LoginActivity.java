@@ -4,6 +4,7 @@ package com.dali.admin.livestreaming.activity;
 import android.content.Context;
 import android.support.design.widget.TextInputLayout;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -58,7 +59,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     protected void initView() {
-
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mLoginPresenter = new LoginPresenter(this);
 
         etLogin = obtainView(R.id.et_username);
@@ -223,6 +224,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void loginSuccess() {
         dismissLoading();
+        showMsg("登录成功");
         invoke(this, MainActivity.class);
         finish();
     }

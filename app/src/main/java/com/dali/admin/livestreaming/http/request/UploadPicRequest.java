@@ -11,13 +11,10 @@ import java.lang.reflect.Type;
 
 /**
  * @description: 图片上传请求
- *
- * @author: Andruby
- * @time: 2016/11/2 18:07
  */
 public class UploadPicRequest  extends IRequest {
 
-    public UploadPicRequest(int requestId, String userId, String type, File file) throws FileNotFoundException {
+    public UploadPicRequest(int requestId, String userId, int type, File file) throws FileNotFoundException {
         mRequestId = requestId;
         mParams.put("userId",userId);
         mParams.put("type",type);
