@@ -1,3 +1,9 @@
+《菜鸟直播》利用腾讯直播、互动直播、点播、IM功能模块实现网红模式的直播与会议模式的互动直播，功能点包括推流、IM消息、打赏、回看录制等功能。
+
+同时对视频相关的知识、技术进行了介绍，可以帮助学习者快速的进行腾讯相关视频应用开发，同时也包括了部分服务器的实现逻辑。
+
+项目的框架结构采用了比较流行MVP，把界面与直播相关业务逻辑进行了分离，同时部分功能进行了调试封装，也引用了比较流行的技术，如OkHttp网络请求、 glide图片加载、ORMLitee数据库、ButterKnife注释等
+
 1、[高层封装之 Activity](http://www.cniao5.com/forum/thread/3652)
 
 2.1、[高层封装之 Fragment](http://www.cniao5.com/forum/thread/3657)
@@ -51,3 +57,4 @@
 16、[利用 Cookie、Token、加密保证用户安全](http://www.cniao5.com/forum/thread/3743)
 
 17、[发起直播](http://www.cniao5.com/forum/thread/3744)
+
