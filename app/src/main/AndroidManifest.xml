@@ -26,6 +26,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
+
     <application
         android:name=".LiveApplication"
         android:allowBackup="true"
@@ -33,10 +34,10 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"
-                  android:launchMode="singleTop"
-                  android:screenOrientation="portrait">
-
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".activity.SplashActivity"
@@ -48,15 +49,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".activity.LoginActivity"
-                  android:launchMode="singleTop"
-                  android:screenOrientation="portrait">
-        </activity>
         <activity
-            android:name=".activity.RegisterActivity">
+            android:name=".activity.LoginActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".mvc.view.MVCLoginActivity"></activity>
-        <activity android:name=".mvc.view.MVCMainActivity"></activity>
+        <activity android:name=".activity.RegisterActivity">
+        </activity>
+        <activity android:name=".mvc.view.MVCLoginActivity"/>
+        <activity android:name=".mvc.view.MVCMainActivity"/>
 
         <!-- 负责网络收发包 -->
         <!-- 消息收发service -->
@@ -102,8 +103,11 @@
             </intent-filter>
         </receiver>
 
-        <activity android:name=".activity.PublishActivity"
-                  android:screenOrientation="portrait">
+        <activity
+            android:name=".activity.PublishActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".activity.LivePublishActivity">
         </activity>
     </application>
 

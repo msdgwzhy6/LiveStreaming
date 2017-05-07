@@ -35,7 +35,7 @@ public class LocationMgr {
     private static LocationListener mLocationListener;
 
     //监测定位权限
-    static public boolean checkLocationPermission(final Activity activity) {
+    public static boolean checkLocationPermission(final Activity activity) {
         if (Build.VERSION.SDK_INT >= 23) {
             if (PackageManager.PERMISSION_GRANTED != ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION)) {
                 ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, Constants.LOCATION_PERMISSION_REQ_CODE);
@@ -46,13 +46,13 @@ public class LocationMgr {
     }
 
     /**
-     * 获取位置信息
+     * 解析位置信息
      *
      * @param activity
      * @param location
      * @return
      */
-    static private String getAddressFromLocation(final Activity activity, Location location) {
+    private static String getAddressFromLocation(final Activity activity, Location location) {
         Geocoder geocoder = new Geocoder(activity);
 
         try {
@@ -88,11 +88,12 @@ public class LocationMgr {
      * @param locationListener
      * @return
      */
-    static public boolean getMyLocation(final Activity activity, final onLocationListener locationListener) {
+    public static boolean getMyLocation(final Activity activity, final onLocationListener locationListener) {
         final LocationManager locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
         if (!locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
             //notify user
-            AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+            AlertDialog.Builder builder
+                    = new AlertDialog.Builder(activity);
             builder.setMessage("尚未开启位置定位服务");
 
             builder.setPositiveButton("开启", new DialogInterface.OnClickListener() {

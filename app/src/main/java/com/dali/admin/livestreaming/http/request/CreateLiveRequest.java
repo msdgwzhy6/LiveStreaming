@@ -12,7 +12,7 @@ import java.lang.reflect.Type;
  */
 public class CreateLiveRequest extends IRequest {
 
-    public CreateLiveRequest(int requestId, String userId , String groupId, String title, String liveCover, String location) {
+    public CreateLiveRequest(int requestId, String userId , String groupId, String title, String liveCover, String location,int isRecord) {
         mRequestId = requestId;
         mParams.put("action","createLive");
         mParams.put("userId",userId);
@@ -20,6 +20,7 @@ public class CreateLiveRequest extends IRequest {
         mParams.put("title", title);
         mParams.put("liveCover", liveCover);
         mParams.put("location", location);
+        mParams.put("isRecord", isRecord);
     }
 
     @Override

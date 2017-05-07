@@ -90,4 +90,18 @@ public class UserInfo extends IDontObfuscate{
     public void setToken(String token) {
         this.token = token;
     }
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "nickname='" + nickname + '\'' +
+                ", sex=" + sex +
+                ", headPic='" + headPic + '\'' +
+                ", sigId='" + sigId + '\'' +
+                ", userId='" + userId + '\'' +
+                ", sdkAppId='" + sdkAppId + '\'' +
+                ", sdkAccountType='" + sdkAccountType + '\'' +
+                ", token='" + token + '\'' +
+                '}';
+    }
 }

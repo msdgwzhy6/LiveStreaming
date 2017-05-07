@@ -75,8 +75,10 @@ public class PublishActivity extends BaseActivity implements View.OnClickListene
         mPublishPresenter = new PublishPresenter(this);
         mPermission = mPublishPresenter.checkPublishPermission(this);
         String strCover = ACache.get(this).getAsString("head_pic");
+        String token = ACache.get(this).getAsString("token");
         if (!TextUtils.isEmpty(strCover)) {
             Log.e(TAG, "head_pic:" + strCover);
+            Log.e(TAG, "token:" + token);
             Glide.with(this).load(strCover).into(mImgCover);
             mTvPicTip.setVisibility(View.GONE);
         } else {
@@ -148,6 +150,8 @@ public class PublishActivity extends BaseActivity implements View.OnClickListene
                         || mTvLBS.getText().toString().equals("定位中") ?
                         "不显示地理位置" : mTvLBS.getText().toString();
                 mPublishPresenter.doPublish(mTvTitle.getText().toString().trim(), mRecordType, location, mBitrateType, false);
+
+                startActivity(new Intent(this,LivePublishActivity.class));
                 break;
             //封面图片选择
             case R.id.cover:

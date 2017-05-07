@@ -36,10 +36,10 @@ public class LiveApplication extends Application{
 //        }
 
 
-        IMInitMgr.init(getApplicationContext());
-        IMLogin.getInstace();
+//        IMInitMgr.init(getApplicationContext());
+//        IMLogin.getInstace();
 
-//        initSDK();
+        initSDK();
 
         //初始化
 //        TIMManager.getInstance().init(getApplicationContext());
@@ -54,19 +54,6 @@ public class LiveApplication extends Application{
         Log.w("LiveLogUitil","app init sdk");
     }
 
-//    private boolean shouldInit() {
-//        ActivityManager am = ((ActivityManager) getSystemService(Context.ACTIVITY_SERVICE));
-//        List<ActivityManager.RunningAppProcessInfo> processInfos = am.getRunningAppProcesses();
-//        String mainProcessName = getPackageName();
-//        int myPid = android.os.Process.myPid();
-//
-//        for (ActivityManager.RunningAppProcessInfo info : processInfos) {
-//            if (info.pid == myPid && mainProcessName.equals(info.processName)) {
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
 
     public static LiveApplication getInstance(){
         return instance;

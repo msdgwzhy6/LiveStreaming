@@ -13,20 +13,23 @@ import com.dali.admin.livestreaming.utils.Constants;
 
 public class UserInfoCache extends IDontObfuscate{
 
-    public static void saveCache(Context context, UserInfo info){
-        ACache.get(context).put("user_id",info.getUserId());
-        ACache.get(context).put("nickname",info.getNickname());
-        ACache.get(context).put("head_pic",info.getHeadPic());
-        ACache.get(context).put("sig_id",info.getSigId());
-        ACache.get(context).put("token",info.getToken());
-        ACache.get(context).put("sdk_app_id",info.getSdkAppId());
-        ACache.get(context).put("adk_account_type",info.getSdkAccountType());
-        ACache.get(context).put("sex",info.getSex());
+        public static void saveCache(Context context, UserInfo info){
+            ACache.get(context).put("user_id",info.getUserId());
+            ACache.get(context).put("nickname",info.getNickname());
+            ACache.get(context).put("head_pic",info.getHeadPic());
+            ACache.get(context).put("sig_id",info.getSigId());
+            ACache.get(context).put("token",info.getToken());
+            ACache.get(context).put("sdk_app_id",info.getSdkAppId());
+            ACache.get(context).put("adk_account_type",info.getSdkAccountType());
+            ACache.get(context).put("sex",info.getSex());
 
-        if (info.getSdkAppId() != null && TextUtils.isDigitsOnly(info.getSdkAccountType())){
-            Constants.IMSDK_ACCOUNT_TYPE = Integer.parseInt(info.getSdkAccountType());
+            if (info.getSdkAppId() != null && TextUtils.isDigitsOnly(info.getSdkAppId())) {
+                Constants.IMSDK_APPID = Integer.parseInt(info.getSdkAppId());
+            }
+            if (info.getSdkAccountType() != null && TextUtils.isDigitsOnly(info.getSdkAccountType())) {
+                Constants.IMSDK_ACCOUNT_TYPE = Integer.parseInt(info.getSdkAccountType());
+            }
         }
-    }
 
 
     public static String getUserId(Context context){

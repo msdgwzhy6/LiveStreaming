@@ -92,17 +92,17 @@ public class PublishPresenter extends IPublishPresenter {
     public Uri cropImage(Uri uri) {
         Uri cropUri = createCoverUri("_crop");
         Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        intent.putExtra("crop", "true");
-        intent.putExtra("aspectX", 750);
+        intent.setDataAndType(uri, "image/*");//可以选择图片类型，如果是 * 表明所有类型的图片
+        intent.putExtra("crop", "true");//设置在开启的Intent中设置显示的 view 可裁剪
+        intent.putExtra("aspectX", 750);//裁剪图片的比例
         intent.putExtra("aspectY", 550);
-        intent.putExtra("outputX", 750);
+        intent.putExtra("outputX", 750);//裁剪图片的宽
         intent.putExtra("outputY", 550);
-        intent.putExtra("scale", true);
-        intent.putExtra("return-data", false);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, cropUri);
-        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());
-        mIPublishView.getActivity().startActivityForResult(intent, Constants.CROP_CHOOSE);
+        intent.putExtra("scale", true);//是否保持比例
+        intent.putExtra("return-data", false);//是否返回bitmap
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, cropUri);//保存图片到指定uri
+        intent.putExtra("outputFormat", Bitmap.CompressFormat.JPEG.toString());//输出格式
+        mIPublishView.getActivity().startActivityForResult(intent, Constants.CROP_CHOOSE);//启动裁剪功能
         return cropUri;
     }
 
@@ -152,6 +152,7 @@ public class PublishPresenter extends IPublishPresenter {
                 mBaseView.showMsg("录屏直播");
             } else {
                 mBaseView.showMsg("摄像头直播");
+//                LivePublishActivity.invoke(mIPublishView.getActivity(),title,location,isRecord,bitrateType);
             }
         }
     }
@@ -165,10 +166,13 @@ public class PublishPresenter extends IPublishPresenter {
         public void onLocationChanged(int code, double lat1, double long1, String location) {
             if (0 == code) {
                 mIPublishView.doLocationSuccess(location);
+                //IM用户登录管理类对用户地理位置进行设置
                 ImUserInfoMgr.getInstance().setLocation(location, lat1, long1, new IUserInfoMgrListener() {
                     @Override
                     public void onQueryUserInfo(int error, String errorMsg) {
-
+                        if (0 != error) {
+                            mIPublishView.showMsg("设置位置信息失败" + errorMsg);
+                        }
                     }
 
                     @Override
@@ -188,6 +192,7 @@ public class PublishPresenter extends IPublishPresenter {
     public void doLocation() {
         if (LocationMgr.checkLocationPermission(mIPublishView.getActivity())) {
             boolean success = LocationMgr.getMyLocation(mIPublishView.getActivity(), mOnLocationListener);
+
             if (!success) {
                 mIPublishView.doLocationFailed();
             }
@@ -269,7 +274,7 @@ public class PublishPresenter extends IPublishPresenter {
 
                         }
                     });
-                    Log.i("PublishActivity", "onUploadResult url:" + url);
+                    Log.i(TAG, "onUploadResult url:" + url);
                     mIPublishView.showMsg("上传封面成功");
                     mIPublishView.doUploadSuccess(url);
                 } else {

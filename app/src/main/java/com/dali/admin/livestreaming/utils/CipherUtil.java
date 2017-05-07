@@ -13,9 +13,6 @@ import javax.crypto.spec.SecretKeySpec;
  * 1、genIV 加密  enString
  * 2、转换为ivString
  * 3、value = ivSting + enString
- *
- * @author: Andruby
- * @time: 2016/10/12 11:23
  */
 public class CipherUtil {
 	private static final String TAG = "CipherUtil";

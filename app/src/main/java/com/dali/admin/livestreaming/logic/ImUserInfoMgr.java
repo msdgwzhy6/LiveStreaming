@@ -33,9 +33,9 @@ public class ImUserInfoMgr {
         public TIMFriendGenderType sex;//性别
         public String selfSignature;//个性签名
 
-        public String location;
-        public double latitude;
-        public double longitude;
+        public String location;//位置
+        public double latitude;//纬度
+        public double longitude;//经度
 
     }
 
@@ -297,6 +297,7 @@ public class ImUserInfoMgr {
      * @param listener  设置结果回调
      */
     public void setLocation(@NonNull final String location, final double latitude, final double longitude, final IUserInfoMgrListener listener) {
+        //位置不为空，直接返回
         if (mTCUserinfo.location != null && mTCUserinfo.location.equals(location)) {
             if (null != listener)
                 listener.onSetUserInfo(0, null);

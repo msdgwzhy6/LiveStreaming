@@ -112,6 +112,9 @@ public class LoginPresenter extends ILoginPresenter implements IMLogin.IMLoginLi
                         mLoginView.loginFailed(response.getStatus(), response.getMsg());
                     }
                     mLoginView.dismissLoading();
+
+                    UserInfo info = (UserInfo) response.getData();
+                    Log.e("token",info.getToken());
                 }
 
                 @Override

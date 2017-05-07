@@ -26,4 +26,5 @@
     <dimen name="h11">19sp</dimen>
 
     <dimen name="h12">20sp</dimen>
+    <dimen name="live_btn_size">35dp</dimen>
 </resources>

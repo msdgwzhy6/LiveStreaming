@@ -124,8 +124,6 @@ public class AsyncHttp {
 
 	//postForm json
 	public void postJson(IRequest request, IHttpListener listener) {
-		LogDebugUtil.e(TAG, "postForm: url=" + request.getUrl());
-
 		Log.e("imLogin","postFo url=" + request.getUrl());
 		if (request != null) {
 

@@ -1,5 +1,7 @@
 package com.dali.admin.livestreaming.http.request;
 
+import android.util.Log;
+
 import com.dali.admin.livestreaming.LiveApplication;
 import com.dali.admin.livestreaming.http.IDontObfuscate;
 import com.dali.admin.livestreaming.mvp.model.UserInfoCache;
@@ -26,7 +28,6 @@ public abstract class IRequest extends IDontObfuscate {
 
 	/**
 	 * 接口请求参数
-	 *
 	 * @return
 	 * @throws
 	 * @Title:getParams
@@ -35,7 +36,11 @@ public abstract class IRequest extends IDontObfuscate {
 	 * @Author : zhm
 	 */
 	public RequestParams getParams() {
+		//login接口不应该包含token参数，也不一定，需要根据项目的具体业务逻辑实现
 		String token = UserInfoCache.getToken(LiveApplication.getInstance());
+
+		Log.e("imLogin","token:"+token);
+
 		if (token != null){
 			mParams.put("token",token);
 		}

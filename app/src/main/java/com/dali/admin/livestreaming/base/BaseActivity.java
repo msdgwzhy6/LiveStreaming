@@ -41,7 +41,6 @@ public abstract class BaseActivity extends FragmentActivity {
 
     protected abstract void setActionBar();
 
-
     /**
      * 设置监听
      */
