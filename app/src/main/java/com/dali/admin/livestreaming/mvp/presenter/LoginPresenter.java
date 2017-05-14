@@ -9,6 +9,8 @@ import com.dali.admin.livestreaming.http.request.RequestComm;
 import com.dali.admin.livestreaming.http.request.VerifyCodeRequest;
 import com.dali.admin.livestreaming.http.response.Response;
 import com.dali.admin.livestreaming.logic.IMLogin;
+import com.dali.admin.livestreaming.logic.IUserInfoMgrListener;
+import com.dali.admin.livestreaming.logic.ImUserInfoMgr;
 import com.dali.admin.livestreaming.mvp.model.UserInfo;
 import com.dali.admin.livestreaming.mvp.model.UserInfoCache;
 import com.dali.admin.livestreaming.mvp.presenter.Ipresenter.ILoginPresenter;
@@ -224,19 +226,22 @@ public class LoginPresenter extends ILoginPresenter implements IMLogin.IMLoginLi
         Log.e(TAG, "onSuccess:login success");
 
         //登录成功，设置登录用户信息
-//        ImUserInfoMgr.getInstance().setUserId(mIMLogin.getLastUserInfo().identifier, new IUserInfoMgrListener() {
-//            @Override
-//            public void onQueryUserInfo(int error, String errorMsg) {
-//
-//            }
-//
-//            @Override
-//            public void onSetUserInfo(int error, String errorMsg) {
-//                if (0 != error) {
-//                    Log.e(TAG, "onSetUserInfo:set userSig failed");
-//                }
-//            }
-//        });
+        ImUserInfoMgr.getInstance().setUserId(ACache.get(mBaseView.getContext()).getAsString("user_id"), new IUserInfoMgrListener() {
+            @Override
+            public void onQueryUserInfo(int error, String errorMsg) {
+
+            }
+
+            @Override
+            public void onSetUserInfo(int error, String errorMsg) {
+                if (0 != error) {
+                    Log.e(TAG, "onSetUserInfo:set userSig failed");
+                }
+            }
+        });
+
+        Log.e("LiveListPresenter","userId --- "+ImUserInfoMgr.getInstance().getUserId());
+        ImUserInfoMgr.getInstance().setUserInfo();
         //移除监听
         mIMLogin.removeIMLoginListener();
         //登录成功提示

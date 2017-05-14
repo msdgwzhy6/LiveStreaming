@@ -1,17 +1,40 @@
 package com.dali.admin.livestreaming.http.response;
 
 
-import com.dali.admin.livestreaming.http.IDontObfuscate;
-
+import java.io.Serializable;
 import java.util.List;
 
 
-public class ResList<T>  extends IDontObfuscate {
+public class ResList<T>  implements Serializable {
 
-	public int pageIndex;
-	public int pageSize;
+	private int pageIndex;
+	private int pageSize;
 
-	public List<T> items;
+	private List<T> items;
+
+	public int getPageIndex() {
+		return pageIndex;
+	}
+
+	public void setPageIndex(int pageIndex) {
+		this.pageIndex = pageIndex;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public List<T> getItems() {
+		return items;
+	}
+
+	public void setItems(List<T> items) {
+		this.items = items;
+	}
 
 	@Override
 	public String toString() {

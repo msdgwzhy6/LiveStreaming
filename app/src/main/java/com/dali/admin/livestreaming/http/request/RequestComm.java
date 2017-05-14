@@ -25,4 +25,7 @@ public class RequestComm {
     public static final int gift_list = 130;
     public static final int gift_send = 131;
     public static final int edit_userinfo = 133;
+
+    public static final int live_list = 138;
+    public static final int live_list_more = 139;
 }

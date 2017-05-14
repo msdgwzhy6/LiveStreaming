@@ -3,6 +3,11 @@ package com.dali.admin.livestreaming.logic;
 import android.content.Context;
 import android.util.Log;
 
+import com.dali.admin.livestreaming.http.AsyncHttp;
+import com.dali.admin.livestreaming.http.request.LoginRequest;
+import com.dali.admin.livestreaming.http.request.RequestComm;
+import com.dali.admin.livestreaming.http.response.Response;
+import com.dali.admin.livestreaming.mvp.model.UserInfo;
 import com.dali.admin.livestreaming.utils.Constants;
 import com.tencent.TIMCallBack;
 import com.tencent.TIMManager;
@@ -11,6 +16,7 @@ import com.tencent.TIMUser;
 import tencent.tls.platform.TLSErrInfo;
 import tencent.tls.platform.TLSLoginHelper;
 import tencent.tls.platform.TLSRefreshUserSigListener;
+import tencent.tls.platform.TLSSmsLoginListener;
 import tencent.tls.platform.TLSUserInfo;
 
 /**
@@ -76,7 +82,7 @@ public class IMLogin {
 
 
     private IMLoginListener mIMLoginListener;
-//    private TCSmsCallback mTCSmsCallback;
+    private TCSmsCallback mTCSmsCallback;
     private TLSLoginHelper mTLSLoginHelper;
 
     //手机ID缓存
@@ -104,9 +110,9 @@ public class IMLogin {
     /**
      * 获取验证码回调
      */
-//    public interface TCSmsCallback {
-//        void onGetVerifyCode(int reaskDuration, int expireDuration);
-//    }
+    public interface TCSmsCallback {
+        void onGetVerifyCode(int reaskDuration, int expireDuration);
+    }
 
     public void setIMLoginListener(IMLoginListener IMLoginListener) {
         mIMLoginListener = IMLoginListener;
@@ -114,46 +120,46 @@ public class IMLogin {
 
     public void removeIMLoginListener() {
         this.mIMLoginListener = null;
-//        this.mTCSmsCallback = null;
+        this.mTCSmsCallback = null;
     }
 
-//    public void pwdLogin(String username, String password) {
-//        LoginRequest request = new LoginRequest(RequestComm.register, username, password);
-//        AsyncHttp.instance().postJson(request, new AsyncHttp.IHttpListener() {
-//            @Override
-//            public void onStart(int requestId) {
-//
-//            }
-//
-//            @Override
-//            public void onSuccess(int requestId, Response response) {
-//                if (response.getStatus() == RequestComm.SUCCESS) {
-//                    UserInfo info = (UserInfo) response.getData();
-//                    imLogin(info.getUserId(), info.getSigId());
-//                } else {
-//                    if (null != mIMLoginListener) {
-//                        mIMLoginListener.onFailure(0, "登录失败！");
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(int requestId, int httpStatus, Throwable error) {
-//                if (null != mIMLoginListener) {
-//                    mIMLoginListener.onFailure(httpStatus, error.getMessage());
-//                }
-//            }
-//        });
-//    }
+    public void pwdLogin(String username, String password) {
+        LoginRequest request = new LoginRequest(RequestComm.register, username, password);
+        AsyncHttp.instance().postJson(request, new AsyncHttp.IHttpListener() {
+            @Override
+            public void onStart(int requestId) {
 
-//    public boolean checkCacheAndLogin(){
-//        if (needLogin()){
-//            return false;
-//        }else {
-//            imLogin(getLastUserInfo().identifier,getUserSig(getLastUserInfo().identifier));
-//        }
-//        return true;
-//    }
+            }
+
+            @Override
+            public void onSuccess(int requestId, Response response) {
+                if (response.getStatus() == RequestComm.SUCCESS) {
+                    UserInfo info = (UserInfo) response.getData();
+                    imLogin(info.getUserId(), info.getSigId());
+                } else {
+                    if (null != mIMLoginListener) {
+                        mIMLoginListener.onFailure(0, "登录失败！");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(int requestId, int httpStatus, Throwable error) {
+                if (null != mIMLoginListener) {
+                    mIMLoginListener.onFailure(httpStatus, error.getMessage());
+                }
+            }
+        });
+    }
+
+    public boolean checkCacheAndLogin(){
+        if (needLogin()){
+            return false;
+        }else {
+            imLogin(getLastUserInfo().identifier,getUserSig(getLastUserInfo().identifier));
+        }
+        return true;
+    }
 
     /**
      * imsdk登录接口，与tls登录验证成功后调用
@@ -188,97 +194,97 @@ public class IMLogin {
     /**
      * TLS短信登录回调接口
      */
-//    private TLSSmsLoginListener mTLSSmsLoginListener = new TLSSmsLoginListener() {
-//        /**
-//         * 短信登录监听
-//         * @param reaskDuration 该时间内不可以重新请求下发短信
-//         * @param expireDuration 短信验证码失效时间
-//         */
-//        @Override
-//        public void OnSmsLoginAskCodeSuccess(int reaskDuration, int expireDuration) {
-//            if (null != mTCSmsCallback)
-//                mTCSmsCallback.onGetVerifyCode(reaskDuration, expireDuration);
-//        }
-//
-//        /**
-//         * 重新请求下发短信成功
-//         * @param reaskDuration 该时间内不可以重新请求下发短信
-//         * @param expireDuration 短信验证码失效时间
-//         */
-//        @Override
-//        public void OnSmsLoginReaskCodeSuccess(int reaskDuration, int expireDuration) {
-//            if (null != mTCSmsCallback)
-//                mTCSmsCallback.onGetVerifyCode(reaskDuration, expireDuration);
-//        }
-//
-//        /**
-//         * 短信验证通过，下一步调用登录接口TLSSmsLogin完成登录
-//         */
-//        @Override
-//        public void OnSmsLoginVerifyCodeSuccess() {
-//            smsLogin(mMobileId);
-//        }
-//
-//        /**
-//         * TLS手机登录成功
-//         * @param tlsUserInfo TLS用户信息
-//         */
-//        @Override
-//        public void OnSmsLoginSuccess(TLSUserInfo tlsUserInfo) {
-//            imLogin(tlsUserInfo.identifier, getUserSig(tlsUserInfo.identifier));
-//        }
-//
-//        /**
-//         * 短信登录失败
-//         * @param tlsErrInfo 错误信息
-//         */
-//        @Override
-//        public void OnSmsLoginFail(TLSErrInfo tlsErrInfo) {
-//            if (null != mIMLoginListener)
-//                mIMLoginListener.onFailure(tlsErrInfo.ErrCode, tlsErrInfo.Msg);
-//        }
-//
-//        /**
-//         * 网络超时
-//         * @param tlsErrInfo 错误信息
-//         */
-//        @Override
-//        public void OnSmsLoginTimeout(TLSErrInfo tlsErrInfo) {
-//            if (null != mIMLoginListener) {
-//                mIMLoginListener.onFailure(tlsErrInfo.ErrCode, tlsErrInfo.Msg);
-//            }
-//        }
-//    };
+    private TLSSmsLoginListener mTLSSmsLoginListener = new TLSSmsLoginListener() {
+        /**
+         * 短信登录监听
+         * @param reaskDuration 该时间内不可以重新请求下发短信
+         * @param expireDuration 短信验证码失效时间
+         */
+        @Override
+        public void OnSmsLoginAskCodeSuccess(int reaskDuration, int expireDuration) {
+            if (null != mTCSmsCallback)
+                mTCSmsCallback.onGetVerifyCode(reaskDuration, expireDuration);
+        }
 
-//    /**
-//     * tlssdk手机验证登录
-//     *
-//     * @param mobile 手机号
-//     */
-//    public void smsLogin(String mobile) {
-//        mTLSLoginHelper.TLSSmsLogin(mobile, mTLSSmsLoginListener);
-//    }
-//
-//    /**
-//     * tls 手机验证码验证
-//     *
-//     * @param verifyCode 手机验证码
-//     */
-//    public void smsLoginVerifyCode(String verifyCode) {
-//        mTLSLoginHelper.TLSSmsLoginVerifyCode(verifyCode, mTLSSmsLoginListener);
-//    }
-//
-//    /**
-//     * 获取验证码
-//     *
-//     * @param mobile        手机号
-//     * @param tcSmsCallback
-//     */
-//    public void smsLoginAskCode(String mobile, TCSmsCallback tcSmsCallback) {
-//        this.mMobileId = mobile;
-//        this.mTCSmsCallback = tcSmsCallback;
-//        mTLSLoginHelper.TLSSmsLoginAskCode(mobile, mTLSSmsLoginListener);
-//    }
+        /**
+         * 重新请求下发短信成功
+         * @param reaskDuration 该时间内不可以重新请求下发短信
+         * @param expireDuration 短信验证码失效时间
+         */
+        @Override
+        public void OnSmsLoginReaskCodeSuccess(int reaskDuration, int expireDuration) {
+            if (null != mTCSmsCallback)
+                mTCSmsCallback.onGetVerifyCode(reaskDuration, expireDuration);
+        }
+
+        /**
+         * 短信验证通过，下一步调用登录接口TLSSmsLogin完成登录
+         */
+        @Override
+        public void OnSmsLoginVerifyCodeSuccess() {
+            smsLogin(mMobileId);
+        }
+
+        /**
+         * TLS手机登录成功
+         * @param tlsUserInfo TLS用户信息
+         */
+        @Override
+        public void OnSmsLoginSuccess(TLSUserInfo tlsUserInfo) {
+            imLogin(tlsUserInfo.identifier, getUserSig(tlsUserInfo.identifier));
+        }
+
+        /**
+         * 短信登录失败
+         * @param tlsErrInfo 错误信息
+         */
+        @Override
+        public void OnSmsLoginFail(TLSErrInfo tlsErrInfo) {
+            if (null != mIMLoginListener)
+                mIMLoginListener.onFailure(tlsErrInfo.ErrCode, tlsErrInfo.Msg);
+        }
+
+        /**
+         * 网络超时
+         * @param tlsErrInfo 错误信息
+         */
+        @Override
+        public void OnSmsLoginTimeout(TLSErrInfo tlsErrInfo) {
+            if (null != mIMLoginListener) {
+                mIMLoginListener.onFailure(tlsErrInfo.ErrCode, tlsErrInfo.Msg);
+            }
+        }
+    };
+
+    /**
+     * tlssdk手机验证登录
+     *
+     * @param mobile 手机号
+     */
+    public void smsLogin(String mobile) {
+        mTLSLoginHelper.TLSSmsLogin(mobile, mTLSSmsLoginListener);
+    }
+
+    /**
+     * tls 手机验证码验证
+     *
+     * @param verifyCode 手机验证码
+     */
+    public void smsLoginVerifyCode(String verifyCode) {
+        mTLSLoginHelper.TLSSmsLoginVerifyCode(verifyCode, mTLSSmsLoginListener);
+    }
+
+    /**
+     * 获取验证码
+     *
+     * @param mobile        手机号
+     * @param tcSmsCallback
+     */
+    public void smsLoginAskCode(String mobile, TCSmsCallback tcSmsCallback) {
+        this.mMobileId = mobile;
+        this.mTCSmsCallback = tcSmsCallback;
+        mTLSLoginHelper.TLSSmsLoginAskCode(mobile, mTLSSmsLoginListener);
+    }
 
     //IMSDK登出
     public void imLoginOut() {
@@ -330,10 +336,10 @@ public class IMLogin {
      *
      * @return
      */
-//    public boolean needLogin() {
-//        TLSUserInfo info = getLastUserInfo();
-//        return info == null || mTLSLoginHelper.needLogin(info.identifier);
-//    }
+    public boolean needLogin() {
+        TLSUserInfo info = getLastUserInfo();
+        return info == null || mTLSLoginHelper.needLogin(info.identifier);
+    }
 
     /**
      * 获取用户签名

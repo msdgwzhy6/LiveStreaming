@@ -119,7 +119,7 @@ public abstract class BaseActivity extends FragmentActivity {
         super.onDestroy();
     }
 
-    public void invoke(Context context,Class clz){
+    protected void invoke(Context context,Class clz){
         startActivity(new Intent(context,clz));
     }
 

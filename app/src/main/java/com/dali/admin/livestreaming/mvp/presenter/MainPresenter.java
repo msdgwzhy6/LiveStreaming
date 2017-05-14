@@ -2,6 +2,7 @@ package com.dali.admin.livestreaming.mvp.presenter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,8 +12,13 @@ import com.dali.admin.livestreaming.R;
 import com.dali.admin.livestreaming.base.BaseActivity;
 import com.dali.admin.livestreaming.fragment.LiveMainFragment;
 import com.dali.admin.livestreaming.fragment.UserInfoFragment;
+import com.dali.admin.livestreaming.logic.IMLogin;
+import com.dali.admin.livestreaming.logic.ImUserInfoMgr;
 import com.dali.admin.livestreaming.mvp.presenter.Ipresenter.IMainPresenter;
 import com.dali.admin.livestreaming.mvp.view.Iview.IMainView;
+import com.tencent.TIMManager;
+
+import tencent.tls.platform.TLSUserInfo;
 
 /**
  * Created by dali on 2017/4/9.
@@ -70,22 +76,22 @@ public class MainPresenter extends IMainPresenter {
 
     @Override
     protected void checkCacheAndLogin() {
-//        if (TextUtils.isEmpty(TIMManager.getInstance().getLoginUser())){
-//            final IMLogin tcLoginMgr = IMLogin.getInstace();
-//            final TLSUserInfo info = IMLogin.getInstace().getLastUserInfo();
-//            tcLoginMgr.setIMLoginListener(new IMLogin.IMLoginListener() {
-//                @Override
-//                public void onSuccess() {
-//                    tcLoginMgr.removeIMLoginListener();;
-//                    ImUserInfoMgr.getInstance().setUserId(info.identifier,null);
-//                }
-//
-//                @Override
-//                public void onFailure(int code, String msg) {
-//                    tcLoginMgr.removeIMLoginListener();
-//                }
-//            });
-//            tcLoginMgr.checkCacheAndLogin();
-//        }
+        if (TextUtils.isEmpty(TIMManager.getInstance().getLoginUser())){
+            final IMLogin tcLoginMgr = IMLogin.getInstace();
+            final TLSUserInfo info = IMLogin.getInstace().getLastUserInfo();
+            tcLoginMgr.setIMLoginListener(new IMLogin.IMLoginListener() {
+                @Override
+                public void onSuccess() {
+                    tcLoginMgr.removeIMLoginListener();;
+                    ImUserInfoMgr.getInstance().setUserId(info.identifier,null);
+                }
+
+                @Override
+                public void onFailure(int code, String msg) {
+                    tcLoginMgr.removeIMLoginListener();
+                }
+            });
+            tcLoginMgr.checkCacheAndLogin();
+        }
     }
 }

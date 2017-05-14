@@ -5,7 +5,9 @@ package com.dali.admin.livestreaming.utils;
  */
 public class Constants {
 
-	public static final int PAGESIZE = 10;
+	public static final int PAGESIZE = 5;
+	public static final int LIVE_PLAYER_REQUEST_CODE = 1000;
+	public static final int START_LIVE_PLAY = 100;
 
 	/**
 	 * 腾讯云服务配置专区（请自主替换）发布使用
@@ -91,6 +93,7 @@ public class Constants {
 	public static final String FILE_ID = "file_id";
 	public static final String ACTIVITY_RESULT = "activity_result";
 	public static final String LIVEID = "live_id";
+	public static final String LIVE_INFO = "live_info";
 
 	public static final String CMD_KEY = "userAction";
 	public static final String DANMU_TEXT = "actionParam";

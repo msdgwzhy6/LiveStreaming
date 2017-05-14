@@ -4,7 +4,9 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.dali.admin.livestreaming.LiveApplication;
 import com.dali.admin.livestreaming.mvp.model.UserInfo;
+import com.dali.admin.livestreaming.utils.AsimpleCache.ACache;
 import com.tencent.TIMCallBack;
 import com.tencent.TIMFriendGenderType;
 import com.tencent.TIMFriendshipManager;
@@ -375,5 +377,11 @@ public class ImUserInfoMgr {
             final TIMFriendGenderType sexType = (info.getSex() == 0?TIMFriendGenderType.Male:TIMFriendGenderType.Female);
             setUserSex(sexType,null);
         }
+    }
+
+    public void setUserInfo() {
+        setUserNickName(ACache.get(LiveApplication.getInstance()).getAsString("nickname"), null);
+        setUserHeadPic(ACache.get(LiveApplication.getInstance()).getAsString("head_pic_small"), null);
+        Log.i(TAG, "setUserInfo: username = " + ImUserInfoMgr.getInstance().getNickname());
     }
 }

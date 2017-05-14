@@ -22,11 +22,9 @@ import com.tencent.rtmp.ui.TXCloudVideoView;
  */
 public class LivePublishActivity extends BaseActivity{
 
-    private static final String TAG = LivePublishActivity.class.getSimpleName();
-
     private TXCloudVideoView mTXCloudVideoView;
     private TXLivePusher  mLivePusher;
-    private String mPushUrl = "rtmp://5438.livepush.myqcloud.com/live/5438_102?bizid=5438&txSecret=a9986ea5417b7cd4ab67c1f935e1892a&txTime=590ee3a0&record=flv";
+    private String mPushUrl;
 
     @Override
     protected void setBeforeLayout() {
@@ -86,7 +84,7 @@ public class LivePublishActivity extends BaseActivity{
         mTXCloudVideoView = obtainView(R.id.video_view);
         mTXCloudVideoView.setVisibility(View.VISIBLE);
 
-        getPushUrl(ACache.get(this).getAsString("user_id"),"@TGS#aQ2TUQJE4","菜鸟窝美女直播","","不显示地理位置");
+        getPushUrl(ACache.get(this).getAsString("user_id"),"@TGS#aQ2TUQJE4","美女直播","","不显示地理位置");
     }
 
     @Override
