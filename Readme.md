@@ -58,3 +58,9 @@
 
 17、[发起直播](http://www.cniao5.com/forum/thread/3744)
 
+18、[直播发起腾讯云后台设置](http://www.cniao5.com/forum/thread/3751)
+
+19、[直播播放](http://www.cniao5.com/forum/thread/3752)
+
+20、[直播列表](http://www.cniao5.com/forum/thread/3755)
+
