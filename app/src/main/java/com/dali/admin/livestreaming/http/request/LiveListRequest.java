@@ -2,7 +2,6 @@ package com.dali.admin.livestreaming.http.request;
 
 import com.dali.admin.livestreaming.http.response.ResList;
 import com.dali.admin.livestreaming.http.response.Response;
-import com.dali.admin.livestreaming.model.LiveInfo;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
@@ -28,6 +27,6 @@ public class LiveListRequest extends IRequest {
 
     @Override
     public Type getParserType() {
-        return new TypeToken<Response<ResList<LiveInfo>>>(){}.getType();
+        return new TypeToken<Response<ResList>>(){}.getType();
     }
 }

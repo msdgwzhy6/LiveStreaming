@@ -5,9 +5,14 @@ package com.dali.admin.livestreaming.utils;
  */
 public class Constants {
 
-	public static final int PAGESIZE = 5;
+	public static final int PAGESIZE = 10;
 	public static final int LIVE_PLAYER_REQUEST_CODE = 1000;
 	public static final int START_LIVE_PLAY = 100;
+
+	public static final int STATE_NORMAL = 0;
+	public static final int STATE_REFRESH = 1;
+	public static final int STATE_MORE = 2;
+
 
 	/**
 	 * 腾讯云服务配置专区（请自主替换）发布使用

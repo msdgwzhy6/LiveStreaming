@@ -14,7 +14,7 @@ public interface ILiveListView extends BaseView {
      * 展示数据
      * @param retCode 获取结果，0表示成功
      * @param datas 列表数据
-     * @param refresh 是否需要刷新界面，首页需要刷新
+     * @param state 状态
      */
-    void onLiveList(int retCode, final ArrayList<LiveInfo> datas,boolean refresh);
+    void onLiveList(int retCode, final ArrayList<LiveInfo> datas, int state);
 }

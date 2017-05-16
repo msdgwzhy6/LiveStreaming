@@ -37,5 +37,6 @@
     <string name="mores">更多...</string>
     <string name="networkerror_retry">网络异常，上拉重新加载</string>
     <string name="no_more_data_and_click">已加载全部内容 点击刷新</string>
+    <string name="recycler_item">1</string>
     <!--registerActivity -->
 </resources>

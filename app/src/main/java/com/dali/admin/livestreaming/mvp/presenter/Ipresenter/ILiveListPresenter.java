@@ -21,18 +21,18 @@ public abstract class ILiveListPresenter implements BasePresenter {
      * 获取缓存列表
      * @return
      */
-    public abstract ArrayList<LiveInfo> getLiveListFormCache();
+    public abstract ArrayList<LiveInfo> getLiveListData();
 
     /**
      * 重新加载列表
      * @return
      */
-    public abstract boolean reloadLiveList();
+    public abstract void refreshData();
 
     /**
      * 加载更多
      * @return
      */
-    public abstract boolean loadDataMore() ;
+    public abstract void loadDataMore() ;
 
 }

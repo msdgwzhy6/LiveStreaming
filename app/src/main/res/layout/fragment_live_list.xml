@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/swipe_refresh_layout_list"
+    <com.cjj.MaterialRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:layout_height="match_parent"
+        android:id="@+id/refresh"
+        app:overlay="true"
+        app:wave_show="true"
+        app:wave_color="#90ffffff"
+        app:progress_colors="@array/material_colors"
+        app:wave_height_type="higher">
 
-        <ListView
+        <android.support.v7.widget.RecyclerView
             android:id="@+id/live_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -18,7 +23,7 @@
             android:clickable="true"
             android:divider="@color/colorActivityBackground"
             android:dividerHeight="5dp"/>
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </com.cjj.MaterialRefreshLayout>
 
     <include
         layout="@layout/loading"
